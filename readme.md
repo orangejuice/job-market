@@ -3,6 +3,11 @@ A course project built on the requirement from lecturer. Only for learning purpo
 
 > requirements document are located in ./doc
 
+## roles
+- freelancer
+- job provider
+- administrator
+
 ## techniques
 EJB / JPA / MDB / JSF     
 
@@ -18,10 +23,11 @@ based on JDK8
 
 > tip: you may need to add glassfish into `File | Settings | Build, Execution, Deployment | Application Servers` firstly.
 
-## roles
-- freelancer
-- job provider
-- administrator
+## some pitfalls met are recorded on 
+
+> Chinese only
+
+<https://orangejuice.cc/code/ejb-project-establishing/>
 
 ## Demo
 
