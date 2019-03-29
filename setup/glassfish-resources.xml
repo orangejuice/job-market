@@ -8,16 +8,16 @@
                    pool-name="MarketPool">
         <description/>
     </jdbc-resource>
-
     <jdbc-connection-pool datasource-classname="com.mysql.cj.jdbc.MysqlDataSource"
                           name="MarketPool">
         <property name="URL" value="jdbc:mysql://localhost:3306/job-market"/>
         <property name="User" value="root"/>
         <property name="Password" value="root"/>
     </jdbc-connection-pool>
-    <connector-connection-pool name="jms/ConnectionFactory"
+
+    <connector-connection-pool name="jms/SimpleConnectionFactory"
                                connection-definition-name="javax.jms.QueueConnectionFactory"
                                resource-adapter-name="jmsra"/>
     <connector-resource enabled="true" jndi-name="jms/marketQueue"
-                        pool-name="jms/ConnectionFactory"/>
+                        pool-name="jms/SimpleConnectionFactory"/>
 </resources>

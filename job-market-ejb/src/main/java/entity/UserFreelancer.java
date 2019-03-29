@@ -7,11 +7,10 @@ import java.util.List;
 @Entity
 public class UserFreelancer extends User {
 
-    @Column(columnDefinition = "default 'This guy is so lazy..'")
     private String skills;
 
     @Lob
-    @Column(columnDefinition = "default 'This guy is so lazy..'")
+    // @Column(columnDefinition = "default 'This guy is so lazy..'")
     private String descriptionMessage;
 
     @Column(columnDefinition = "Decimal(10,2) default '0.0'")
