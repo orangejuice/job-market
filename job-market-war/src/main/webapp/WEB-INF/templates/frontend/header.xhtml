@@ -1,0 +1,42 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <div class="blog-masthead">
+        <div class="container">
+            <nav class="blog-nav">
+                <h:form>
+                    <h:link outcome="/index" value="Home" styleClass="blog-nav-item blog-nav-item-home"/>
+                    <h:link outcome="/jobs" value="Job Gallery" styleClass="blog-nav-item blog-nav-item-text"/>
+                    <h:link outcome="/about" value="About" styleClass="blog-nav-item blog-nav-item-about"/>
+
+                    <c:choose>
+                        <c:when test="#{userBean.currentUser != null}">
+                            <h:commandLink action="#{userBean.logout}" value="Logout"
+                                           style="float:right;" styleClass="blog-nav-item blog-nav-item-image"/>
+                            <c:if test="#{userBean.currentUser.role eq constantBean.administrator}">
+                                <h:link outcome="/dashboard/index" value="Dashboard"
+                                        style="float:right;" styleClass="blog-nav-item blog-nav-item-image"/>
+                            </c:if>
+                            <h:link value="Welcome, #{userBean.currentUser.username}"
+                                    style="float:right;" styleClass="blog-nav-item blog-nav-item-image"/>
+                        </c:when>
+                        <c:otherwise>
+                            <h:link outcome="/register" value="Register" style="float:right;"
+                                    styleClass="blog-nav-item blog-nav-item-image"/>
+                            <h:link outcome="/login" value="Login" style="float:right;"
+                                    styleClass="blog-nav-item blog-nav-item-image"/>
+                        </c:otherwise>
+                    </c:choose>
+                </h:form>
+                <!-- h:outputLink 的 value 会直接作为 a 的 href. h:link 的 outcome 就是导航字符串, 自动带上Context路径-->
+                <!--<h:outputLink value="index">Link</h:outputLink>-->
+            </nav>
+        </div>
+    </div>
+    <div class="container">
+        <div class="blog-header">
+            <h1 class="blog-title"><h:link outcome="index" value="Jobs Market"/></h1>
+            <!--<p class="lead blog-description">个人博客系统 - JavaEE / EJB / JPA / JSF - Powered By Youth．霖</p>-->
+        </div>
+    </div>
+</ui:composition>

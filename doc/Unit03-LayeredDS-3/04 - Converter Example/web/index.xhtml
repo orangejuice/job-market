@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>JSF Converter Example</title>
+    </h:head>
+    <h:body style="font-size: 24px">
+        <h2>Convert Number Example</h2>
+        <table border="1" cellspacing="2" cellpadding="2">
+            <tr><th>Parameter</th><th>Value Passed</th><th>Output</th></tr>
+            <tr><td>(none)</td><td>#{dataBean.doubleNum2}</td>
+                <td>
+                    <h:outputText value="#{dataBean.doubleNum2}" >
+                        <f:convertNumber />
+                    </h:outputText>
+                </td></tr>
+            <tr><td>(none)</td><td>#{dataBean.doubleNum}</td>
+                <td>
+                    <h:outputText value="#{dataBean.doubleNum}" >
+                        <f:convertNumber />
+                    </h:outputText>
+                </td></tr>
+            <tr><td>minFractionDigits="2"</td><td>#{dataBean.doubleNum2}</td>
+                <td>
+                    <h:outputText value="#{dataBean.doubleNum2}" >
+                        <f:convertNumber minFractionDigits="2" />
+                    </h:outputText>
+                </td></tr>
+            <tr><td>minFractionDigits="2"</td><td>#{dataBean.doubleNum}</td>
+                <td>
+                    <h:outputText value="#{dataBean.doubleNum}" >
+                        <f:convertNumber minFractionDigits="2" />
+                    </h:outputText>
+                </td></tr>
+            <tr><td>minFractionDigits="1" maxFractionDigits="4"</td><td>#{dataBean.doubleNum}</td>
+                <td>
+                    <h:outputText value="#{dataBean.doubleNum}" >
+                        <f:convertNumber minFractionDigits="1" 
+                                         maxFractionDigits="4" />
+                    </h:outputText>
+                </td></tr>
+            <tr><td>minFractionDigits="1" maxFractionDigits="4"</td><td>#{dataBean.intNum}</td>
+                <td>
+                    <h:outputText value="#{dataBean.intNum}" >
+                        <f:convertNumber minFractionDigits="1" 
+                                         maxFractionDigits="4" />
+                    </h:outputText>
+                </td></tr>
+            <tr><td>maxFractionDigits="9"</td><td>#{dataBean.doubleNum}</td>
+                <td>
+                    <h:outputText value="#{dataBean.doubleNum}" >
+                        <f:convertNumber maxFractionDigits="9" />
+                    </h:outputText>
+                </td></tr>
+            <tr><td>pattern="#00000.000"</td><td>#{dataBean.doubleNum}</td>
+                <td>
+                    <h:outputText value="#{dataBean.doubleNum}" >
+                        <f:convertNumber pattern="#00000.000" />
+                    </h:outputText>
+                </td></tr>
+            <tr><td>pattern="#00000.000"</td><td>#{dataBean.intNum}</td>
+                <td>
+                    <h:outputText value="#{dataBean.intNum}" >
+                        <f:convertNumber pattern="#00000.000" />
+                    </h:outputText>
+                </td></tr>
+            <tr><td>currencySymbol="$"</td><td>#{dataBean.currency}</td>
+                <td>
+                    <h:outputText value="#{dataBean.currency}">
+                        <f:convertNumber currencySymbol="$" 
+                                         type="currency" />
+                    </h:outputText>
+                </td></tr>
+            <tr><td>currencySymbol="€"</td><td>#{dataBean.intNum}</td>
+                <td>
+                    <h:outputText value="#{dataBean.intNum}">
+                        <f:convertNumber currencySymbol="€" 
+                                         type="currency" />
+                    </h:outputText>
+                </td></tr>
+            <tr><td>currencyCode="EUR"</td><td>#{dataBean.currency}</td>
+                <td>
+                    <h:outputText value="#{dataBean.currency}">
+                        <f:convertNumber currencyCode="EUR" type="currency" />
+                    </h:outputText>
+
+                </td></tr>
+            <tr><td>type="percent"</td><td>100.6789%</td>
+                <td>
+                    <h:outputText value="100.6789%" >
+                        <f:convertNumber type="percent" />
+                    </h:outputText>
+                </td></tr>
+            <tr><td>dateStyle="full"</td><td>#{dataBean.today}</td>
+                <td> 
+                    <h:outputText value="#{dataBean.today}">
+                        <f:convertDateTime dateStyle="full"/>
+                    </h:outputText>
+                </td></tr>
+            <tr><td>dateStyle="full" type="both"</td><td>#{dataBean.today}</td>
+                <td> 
+                    <h:outputText value="#{dataBean.today}">
+                        <f:convertDateTime type="both" dateStyle="full"/>
+                    </h:outputText>
+                </td></tr>
+            <tr><td>type="time"</td><td>#{dataBean.today}</td>
+                <td> 
+                    <h:outputText value="#{dataBean.today}">
+                        <f:convertDateTime type="time" />
+                    </h:outputText>
+                </td></tr>
+            <tr><td>pattern="EEEEEEEE, MMM dd, yyyy"</td><td>#{dataBean.today}</td>
+                <td> 
+                    <h:outputText value="#{dataBean.today}">
+                        <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
+                    </h:outputText>
+                </td></tr>
+            <tr><td>pattern="EEE dd.MM.yy 'at' hh:mm:ss a z"</td><td>#{dataBean.today}</td>
+                <td> 
+                    <h:outputText value="#{dataBean.today}">
+                        <f:convertDateTime pattern="EEE dd.MM.yy 'at' hh:mm:ss a z"/>
+                    </h:outputText>
+                </td></tr>
+            <tr><td>pattern="hh:mm:ss a"</td><td>#{dataBean.today}</td>
+                <td> 
+                    <h:outputText value="#{dataBean.today}">
+                        <f:convertDateTime pattern="hh:mm:ss a "/>
+                    </h:outputText>
+                </td></tr>
+            <tr><td>pattern="HH:mm:ss"</td><td>#{dataBean.today}</td>
+                <td> 
+                    <h:outputText value="#{dataBean.today}">
+                        <f:convertDateTime pattern="HH:mm:ss"/>
+                    </h:outputText>
+                </td></tr>
+        </table>    
+    </h:body>
+</html>
+

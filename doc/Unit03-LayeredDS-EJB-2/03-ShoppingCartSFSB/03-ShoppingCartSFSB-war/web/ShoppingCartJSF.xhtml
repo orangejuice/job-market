@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>JSF Shopping Cart</title>
+    </h:head>
+    <h:body>
+        <h1>JSF Shopping Example</h1> 
+        Note: usually there is no need to use a Stateful Session Bean
+        together with a Session Scoped Managed Bean - certainly in 
+        this case, a Session Scoped Managed Bean together with a 
+        Stateless Session Bean would have been sufficient.
+
+        <h2>
+            <h:form>
+                <table>
+                    <tr><td><bf>Item</bf></td><td><bf>Quantity</bf></td></tr>
+                    <tr><td>PC</td><td><h:inputText value="#{shoppingBean.quantityPC}">
+                                <f:validateLongRange minimum="0" maximum="100"/>
+                            </h:inputText></td></tr>    
+                    <tr><td>Monitor</td><td><h:inputText value="#{shoppingBean.quantityMonitor}">
+                                <f:validateLongRange minimum="0" maximum="100"/>
+                            </h:inputText></td></tr>    
+                    <tr><td>Printer</td><td><h:inputText value="#{shoppingBean.quantityPrinter}">
+                                <f:validateLongRange minimum="0" maximum="100"/>
+                            </h:inputText></td></tr>    
+                    <tr><td><h:commandButton action="#{shoppingBean.addToBasket()}" 
+                                             value ="Add to Basket"/></td>
+                        <td><h:commandButton action="#{shoppingBean.removeFromBasket()}" 
+                                             value ="Remove from Basket"/></td></tr>
+                    <tr><td><h:commandButton action="#{shoppingBean.checkout()}" 
+                                             value ="Checkout"/></td>
+                        <td><h:commandButton action="#{shoppingBean.cancel()}" 
+                                             value ="Cancel"/></td></tr>
+                        
+                </table>
+                Current content of shopping Cart:<br/>
+                #{shoppingBean.itemList}
+            </h:form>
+        </h2>
+
+    </h:body>
+</html>
+

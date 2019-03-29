@@ -1,0 +1,86 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough" xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <f:event listener="#{userBean.loadCurrentUser}" type="preRenderView"/>
+    <f:view>
+        <div class="col-sm-8 blog-main">
+            <h2>Profile</h2>
+            <c:if test="#{userBean.currentUser.role eq constantBean.freelancer}">
+                <p>My balance: #{userFreelancerBean.freelancer.balance} €</p>
+            </c:if>
+            <hr/>
+            <h:form styleClass="form-horizontal">
+                <div class="form-group">
+                    <h:outputLabel for="userId" styleClass="col-sm-2 control-label">Uni ID</h:outputLabel>
+                    <div class="col-sm-10">
+                        <h:outputText type="text" class="form-control" id="userId" p:required="true"
+                                      value="#{userBean.currentUser.id}"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h:outputLabel for="username" styleClass="col-sm-2 control-label">Username</h:outputLabel>
+                    <div class="col-sm-10">
+                        <h:outputText type="text" class="form-control" id="username" p:required="true"
+                                      value="#{userBean.username}"/>
+                    </div>
+                </div>
+                <c:if test="#{userBean.currentUser.role eq constantBean.freelancer}">
+                    <div class="form-group">
+                        <h:outputLabel styleClass="col-sm-2 control-label" for="skills" value="skills"/>
+                        <div class="col-sm-10">
+                            <h:inputTextarea id="skills" value="#{userBean.skills}" styleClass="form-control"
+                                             required="true" p:placeholder="skills description" p:required="true"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel styleClass="col-sm-2 control-label" for="selfIntroduction" value="intro"/>
+                        <div class="col-sm-10">
+                            <h:inputTextarea id="selfIntroduction" value="#{userBean.selfIntroduction}"
+                                             styleClass="form-control"
+                                             required="true" p:placeholder="Job description" p:required="true"/>
+                        </div>
+                    </div>
+                </c:if>
+                <div class="form-group">
+                    <h:outputLabel for="email" class="col-sm-2 control-label">E-Mail</h:outputLabel>
+                    <div class="col-sm-10">
+                        <h:inputText type="email" class="form-control" id="email" required="true"
+                                     p:required="true" p:type="email" validator="#{userBean.validateEmail}"
+                                     value="#{userBean.email}" p:placeholder="email address"/>
+                        <h:message for="email" styleClass="text-danger"/>
+                    </div>
+                </div>
+                <!--<h2 style="margin-top: 50px">Password</h2>-->
+                <hr/>
+                <p class="help-block col-sm-offset-2">leave blank if donnot need change password</p>
+                <div class="form-group">
+                    <h:outputLabel class="col-sm-2 control-label" for="oldPassword">Old</h:outputLabel>
+                    <div class="col-sm-10">
+                        <h:inputSecret styleClass="form-control" id="oldPassword"
+                                       value="#{userBean.oldPassword}"/>
+                        <!--<input class="form-control" type="password" minlength="8" id="old-password-plain"-->
+                        <!--placeholder="Old password"/>-->
+                        <!--<input type="hidden" id="old-password" name="old-password"/>-->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="newPassword">New</label>
+                    <div class="col-sm-10">
+                        <h:inputSecret type="password" styleClass="form-control" id="newPassword"
+                                       value="#{userBean.newPassword}"/>
+                        <!--<input class="form-control" type="password" minlength="8" id="new-password-plain"-->
+                        <!--placeholder="more than 8 digital alphanumeric combination"/>-->
+                        <!--<input type="hidden" id="new-password" name="new-password"/>-->
+                    </div>
+                </div>
+                <p class="col-sm-offset-2 text-danger">#{userBean.profileMsg}</p>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <h:commandButton action="#{userBean.update}" value="Save" styleClass="btn btn-primary"/>
+                    </div>
+                </div>
+            </h:form>
+        </div>
+    </f:view>
+</ui:composition>

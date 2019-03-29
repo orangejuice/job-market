@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Converter Examples</title>
+    </h:head>
+    <h:body>
+        <h1>Converter Examples</h1>
+        <h2>Dependency Injection</h2>
+
+        <h:form>
+            Enter a Dollar amount:
+            <h:inputText id="injectionDollar" value="#{convertInject.amount}">
+                <f:validateDoubleRange minimum="0.0"/>
+                <f:convertNumber currencySymbol="$" type="currency" />
+            </h:inputText><br/><br/>
+            Equivalent Euro amount:
+            <h:outputText value="#{convertInject.getEuro()}">
+                <f:convertNumber currencyCode="EUR" type="currency" />
+            </h:outputText>
+        </h:form>           
+    </h:body>
+</html>
+

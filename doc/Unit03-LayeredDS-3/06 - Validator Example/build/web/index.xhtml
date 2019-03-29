@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Validator Example</title>
+    </h:head>
+    <h:body>
+        <h1>Validator Example</h1>
+        <p>Enter values in given range - all ranges are given inclusive</p>
+        <h:form>
+            <p>Enter a number between 10 and 20</p>
+            <p><h:inputText id="integer" 
+                            value="#{userData.intValue}">
+                    <f:validateLongRange minimum="10" 
+                                         maximum="20"/>
+                </h:inputText></p>
+            <p>Enter a floating point number between 1.2 and 1.7</p>
+            <p><h:inputText id="floating" 
+                            value="#{userData.doubleValue}">                    
+                    <f:validateDoubleRange minimum="1.2" 
+                                           maximum="1.7"/>
+                </h:inputText></p>
+            <p>Enter a string with length between 2 and 8 
+                characters</p>
+            <p><h:inputText id="string" value="#{userData.stringValue}">
+                    <f:validateLength minimum="2" maximum="8"/>
+                </h:inputText></p>
+            <p>Enter a string that contains only lower case 
+                letters and 
+                is of length 5 to 8</p>
+            <p><h:inputText id="regex" value="#{userData.regexValue}">
+                    <f:validateRegex pattern="[a-z]{5,8}?"/>
+                </h:inputText></p>
+            <p><h:commandButton value="Evaluate" action="result"/></p>
+        </h:form>
+    </h:body>
+</html>
+

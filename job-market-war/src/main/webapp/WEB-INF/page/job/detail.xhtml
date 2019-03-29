@@ -1,0 +1,98 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <div class="col-sm-8 blog-main">
+        <c:choose>
+            <c:when test="#{jobBean.job!=null}">
+                <div class="blog-post">
+                    <h2 class="blog-post-title">${jobBean.job.title}</h2>
+                    <div class="blog-post-meta well small" style="padding: 2%;">
+                        Provider：<span class="blog-post-publish-author">#{jobBean.job.provider.username}</span> |
+                        Published：<span class="blog-post-publish-date">#{jobBean.job.publishDate}</span> <br/>
+                        Keywords：<span class="blog-post-publish-category">#{jobBean.job.keywords}</span>
+                    </div>
+                    <div class="blog-post-content">
+                        <h:outputText escape="false" value="Payment offer: #{jobBean.job.paymentOffer}€"/>
+                    </div><!-- /.blog-post-content -->
+                    <hr/>
+                    <div class="blog-post-content">
+                        <h:outputText escape="false" value="#{jobBean.job.description}"/>
+                    </div><!-- /.blog-post-content -->
+                    <hr/>
+                    <div class="blog-post-content">
+                        Status: <h:outputText escape="false" value="#{jobBean.job.jobStatus}"/>
+                    </div><!-- /.blog-post-content -->
+                </div><!-- /.blog-post -->
+
+                <h:form id="post-like">
+                    <nav>
+                        <input type="hidden" name="id" value="#{jobBean.job.id}"/>
+                        <ul class="pager">
+                            <c:choose>
+                                <c:when test="#{userBean.currentUser != null}">
+                                    <c:choose>
+                                        <c:when test="#{userBean.currentUser.role eq constantBean.freelancer}">
+                                            <c:choose>
+                                                <c:when test="#{not userFreelancerBean.ifHasTaken(jobBean.job.id)}">
+                                                    <li><h:commandLink value="Undertake"
+                                                                       disabled="#{jobBean.job.jobStatus ne constantBean.jobStatus('Open')}"
+                                                                       action="#{userFreelancerBean.undertake(jobBean.job)}"
+                                                                       onclick="if (!confirm('Really want to undertake?')) return false">
+                                                        <f:ajax render="post-like"/>
+                                                    </h:commandLink>
+                                                    </li>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <li><h:commandLink value="Revoke"
+                                                                       disabled="#{jobBean.job.jobStatus ne constantBean.jobStatus('Open')}"
+                                                                       action="#{userFreelancerBean.revoke(jobBean.job)}"
+                                                                       onclick="if (!confirm('Really want to revoke?')) return false">
+                                                        <f:ajax render="post-like"/>
+                                                    </h:commandLink></li>
+                                                    <c:if test="#{jobBean.job.assignedFreelancer.id eq userFreelancerBean.freelancer.id}">
+                                                        <li><h:commandLink value="Complete" styleClass="text-danger"
+                                                                           disabled="#{jobBean.job.jobStatus ne constantBean.jobStatus('Closed')}"
+                                                                           action="#{userFreelancerBean.complete(jobBean.job)}">
+                                                            <f:ajax render="post-like"/>
+                                                        </h:commandLink></li>
+                                                        <li>
+                                                            <p style="font-weight: bold">Congrats! you have been accepted to undertake this job.</p>
+                                                        </li>
+                                                    </c:if>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:when>
+                                        <c:when test="#{userBean.currentUser.role eq constantBean.provider}">
+                                            <li><h:commandLink value="Remove" styleClass="text-danger"
+                                                               disabled="#{jobBean.job.jobStatus ne constantBean.jobStatus('Open')}"
+                                                               action="#{userProviderBean.remove(jobBean.job.id)}">
+                                                <f:ajax render="post-like"/>
+                                            </h:commandLink></li>
+                                        </c:when>
+                                        <c:otherwise>
+                                            Become a freelancer user to apply desired jobs.
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:when>
+                                <c:otherwise>
+                                    <input type="hidden" name="returnUrl"
+                                           value="${request.requestURI}?${request.queryString}"/>
+                                    <h:commandLink action="#{jobBean.toLogin}"
+                                                   value="Login now"/>, then apply for taking this job freely!
+                                </c:otherwise>
+                            </c:choose>
+                        </ul>
+                    </nav>
+                </h:form>
+                <div class="blog-comment">
+                    <ui:include src="comments.xhtml"/>
+                </div>
+            </c:when>
+            <c:otherwise>
+                This job has gone!
+            </c:otherwise>
+        </c:choose>
+    </div><!-- /.blog-main -->
+</ui:composition>

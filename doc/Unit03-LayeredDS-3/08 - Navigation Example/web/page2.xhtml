@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Navigation Example</title>
+    </h:head>
+    <h:body style="font-size: 24px">
+        <h1> page2.xhtml - User-Defined Navigation</h1>
+        <h:form>
+            <h:commandButton id="src1" value="back to index"
+                             action="#{navigationBean.userPage1}"/>
+            &nbsp;&nbsp;&nbsp;
+            <h:commandButton id="src2" value="back to page 1"
+                             action="#{navigationBean.userPage2}"/>
+        </h:form>
+    </h:body>
+</html>
+

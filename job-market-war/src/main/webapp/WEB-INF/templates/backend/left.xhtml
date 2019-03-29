@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <div class="col-sm-3 col-md-2 sidebar">
+
+        <ul class="nav nav-sidebar">
+            <li class="left-siderbar-overview"><h:link outcome="/dashboard/index" value="Overview"/></li>
+        </ul>
+
+        <c:if test="#{userBean.currentUser.role eq constantBean.administrator}">
+            <ul class="nav nav-sidebar">
+                <li class="left-sidebar-provider"><h:link outcome="/dashboard/provider" value="Providers"/></li>
+                <li class="left-sidebar-freelancer"><h:link outcome="/dashboard/freelancer" value="Freelancers"/></li>
+            </ul>
+
+            <ul class="nav nav-sidebar">
+                <li class="left-siderbar-all-text"><h:link outcome="/dashboard/articles" value="All jobs"/></li>
+            </ul>
+
+            <!--<ul class="nav nav-sidebar">-->
+                <!--<li class="left-siderbar-settings"><h:link outcome="/dashboard/settings" value="设置"/></li>-->
+            <!--</ul>-->
+        </c:if>
+    </div>
+</ui:composition>

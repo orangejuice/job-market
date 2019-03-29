@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <!--首页内容-->
+    <script>$('.blog-nav-item-home').addClass('active');</script>
+    <div class="col-sm-8 blog-main">
+        <div class="col-sm-12 well newest-post newest-post-text">
+            <h:link outcome="jobs" value="All available jobs" styleClass="btn btn-default"/>
+            <hr/>
+            <h3>Latest</h3>
+            <c:choose>
+                <c:when test="#{jobBean.newestJob != null}">
+                     <span><h:link outcome="/job?id=#{jobBean.newestJob.id}" value="#{jobBean.newestJob.title}"/>
+                        </span>
+                    <span style="float: right" class="blog-post-publish-category">
+                        <h:outputText escape="false" value="#{jobBean.newestJob.keywords}"/>
+                    </span>
+                </c:when>
+                <c:otherwise>
+                    No available jobs for now
+                </c:otherwise>
+            </c:choose>
+        </div>
+        <c:if test="#{userBean.currentUser ne null and userBean.currentUser.role ne constantBean.administrator}">
+            <ui:param name="record" value="true"/>
+            <div class="col-sm-12 well newest-post newest-post-image">
+                <h:link outcome="/record" value="Jobs related to me" styleClass="btn btn-default"/>
+                <hr/>
+                <h3>Latest</h3>
+                <c:choose>
+                    <c:when test="#{jobListBean.jobs.item ne null and jobListBean.jobs.item.size() gt 0}">
+                        <!--<div class="blog-post">-->
+                        <!--<div class="blog-post-meta">-->
+                        <span><h:link outcome="/job?id=#{jobListBean.jobs.item.get(0).id}"
+                                      value="#{jobListBean.jobs.item.get(0).title}"/>
+                        </span>
+                        <span style="float: right"
+                              class="blog-post-publish-category">Status: #{jobListBean.jobs.item.get(0).jobStatus}</span>
+                        <!--</div>-->
+                        <!--</div>-->
+                    </c:when>
+                    <c:otherwise>
+                        No available jobs for now
+                    </c:otherwise>
+                </c:choose>
+            </div>
+        </c:if>
+    </div>
+</ui:composition>

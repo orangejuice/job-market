@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Data Table Example</title>
+    </h:head>
+    <h:body>
+        <h1>Data Tables</h1>
+        <h2>First a list with all entries:</h2>
+        <h:form>
+            <h:dataTable value='#{myFriends.friends}' var='friend'
+                         border='1' width='300' cellpadding="5">
+                <h:column>
+                    <f:facet name='header'>Name</f:facet>
+                    <h:inputText value="#{friend.firstname}" size="10"
+                                 rendered="#{friend.canEdit}"/>
+                    <h:outputText value="#{friend.firstname}"
+                                  rendered="#{not friend.canEdit}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name='header'>Surname</f:facet>
+                    <h:inputText value="#{friend.lastname}" size="10"
+                                 rendered="#{friend.canEdit}"/>
+                    <h:outputText value="#{friend.lastname}"
+                                  rendered="#{not friend.canEdit}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name='header'>Age</f:facet>
+                    <h:inputText value="#{friend.age}" size="3"
+                                 rendered="#{friend.canEdit}">
+                        <f:validateLongRange minimum="0" maximum="150"/>
+                    </h:inputText>
+                    <h:outputText value="#{friend.age}"
+                                  rendered="#{not friend.canEdit}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Edit</f:facet>
+                    <h:commandButton value="Edit" 
+                                     action="#{myFriends.editFriend(friend)}"
+                                     rendered="#{not friend.canEdit}">
+                    </h:commandButton>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Delete</f:facet>
+                    <h:commandButton value="Delete" 
+                                     action="#{myFriends.removeFriend(friend)}"
+                                     rendered="#{not friend.canEdit}">
+                    </h:commandButton>
+                </h:column>
+            </h:dataTable>
+            <br/>
+        <h:commandButton value="Save Friends"
+                         action="#{myFriends.saveFriends}" />	 
+
+<h3>Add Friend</h3>
+      <hr/>
+      <table>
+      <tr>
+            <td>Name:</td>
+            <td><h:inputText size="10" value="#{myFriends.firstname}" /></td>
+      </tr>
+      <tr>
+            <td>Surname:</td>
+            <td><h:inputText size="20" value="#{myFriends.surname}" /></td>
+      </tr>
+      <tr>
+            <td>Age:</td>
+            <td><h:inputText size="5" value="#{myFriends.age}" /></td>
+      </tr>
+      <tr>
+            <td> </td>
+            <td><h:commandButton value="Add Employee" 
+                                 action="#{myFriends.addFriend}" /></td>
+      </tr>
+      </table>	          
+        </h:form>
+
+      <h2>Now a list with all friends called "Quinn"</h2>
+        <h:form>
+            <h:dataTable value='#{myFriends.getFriendByName("Quinn")}' 
+                         var='friend' border='1' width='300' cellpadding="3">
+                <h:column>
+                    <f:facet name='header'>Name</f:facet>
+                        #{friend.firstname}
+                </h:column>
+                <h:column>
+                    <f:facet name='header'>Surname</f:facet>
+                        #{friend.lastname}
+                </h:column>
+                <h:column>
+                    <f:facet name='header'>Age</f:facet>
+                        #{friend.age}
+                </h:column>
+            </h:dataTable>
+        </h:form>        
+    </h:body>
+</html>
+
