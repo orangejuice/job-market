@@ -107,7 +107,7 @@ public class UserBean implements Serializable {
 
         user.setEmail(email);
         user.setUsername(username);
-        user.setPassword(MD5Util.md5(user.getUsername() + user.getPassword()));
+        user.setPassword(MD5Util.md5(username + password));
 
         user = userDao.save(user);
         setCurrentUser(user);
