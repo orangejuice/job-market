@@ -32,7 +32,7 @@ based on JDK8
 
 > Chinese only
 
-<https://orangejuice.cc/code/ejb-project-establishing/>
+<https://orangejuice.cc/ejb-project-establishing/>
 
 ## Demo
 
