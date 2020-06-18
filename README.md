@@ -30,9 +30,9 @@ based on JDK8
 
 ## some pitfalls met are recorded on
 
-> Chinese only
+> In Chinese
 
-<https://orangejuice.cc/notes/ejb-project-establishing/>
+[使用 IntelliJ 创建并编写 EJB 项目](https://orangejuice.cc/zh/2019-03-24-develop-an-ejb-project-in-one-week)
 
 ## Demo
 
